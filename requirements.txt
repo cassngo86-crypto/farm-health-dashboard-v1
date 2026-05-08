@@ -20,5 +20,9 @@ lightgbm
 shap
 numba
 
+# PDF Generation
+reportlab  
+
+
 # Financial/Stock Data
 requests
