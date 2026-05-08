@@ -20,6 +20,9 @@ lightgbm
 shap
 numba
 
+# Google Sheets Connection
+st-gsheets-connection
+
 # PDF Generation
 reportlab  
 
