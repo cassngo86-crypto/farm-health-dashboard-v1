@@ -4034,6 +4034,7 @@ elif page == "🤖 AI/ML Journey":
     st.success(
         "🚀 Your dashboard is already at **Stage 3 (Predictive)** with foundations for Stage 4 (AI-driven decisions)."
     )
+    
 
    
     st.markdown("---")
@@ -4046,6 +4047,56 @@ elif page == "🤖 AI/ML Journey":
 
     render_model_dev_journey_table()
 
+import streamlit as st
+from streamlit_gsheets import GSheetsConnection
+import pandas as pd
+
+# Initialize connection
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+st.divider()
+st.header("🐄 Log New Health Data")
+
+# Create a form so the app doesn't rerun on every keystroke
+with st.form("health_entry_form"):
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        animal_id = st.text_input("Animal ID (e.g., COW-001)")
+        health_score = st.number_input("Health Score", min_value=0, max_value=100, value=75)
+    
+    with col2:
+        date_logged = st.date_input("Date of Observation")
+        status = st.selectbox("Status", ["Healthy", "Monitoring", "Treatment Required"])
+        
+    notes = st.text_area("Additional Notes")
+    
+    submit = st.form_submit_button("Save to Google Sheets")
+
+# Logic to append data
+if submit:
+    if animal_id:
+        # 1. Read existing data from your sheet
+        existing_data = conn.read(worksheet="Sheet1")
+        
+        # 2. Create a DataFrame for the new entry
+        new_row = pd.DataFrame([{
+            "Date": date_logged.strftime("%Y-%m-%d"),
+            "Animal_ID": animal_id,
+            "Health_Score": health_score,
+            "Status": status,
+            "Notes": notes
+        }])
+        
+        # 3. Concatenate and update the sheet
+        updated_df = pd.concat([existing_data, new_row], ignore_index=True)
+        conn.update(worksheet="Sheet1", data=updated_df)
+        
+        st.success(f"Successfully logged data for {animal_id}!")
+        # Clear cache so the dashboard updates with the new data
+        st.cache_data.clear()
+    else:
+        st.warning("Please enter an Animal ID before saving.")
 
 
 
