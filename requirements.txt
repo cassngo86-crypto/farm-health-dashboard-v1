@@ -5,8 +5,9 @@ streamlit
 pandas
 numpy
 scipy
+statsmodels  # <--- Add this line
 
-# Visualization (If used in your app)
+# Visualization
 matplotlib
 seaborn
 plotly
