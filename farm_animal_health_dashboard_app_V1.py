@@ -4055,7 +4055,8 @@ import pandas as pd
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 st.divider()
-st.header("🐄 Log New Health Data")
+#st.header("🐄 Log New Health Data")
+st.markdown("## <h2 style='color: #31333F;'>🐄 Log New Health Data</h2>", unsafe_allow_html=True)
 
 # Create a form so the app doesn't rerun on every keystroke
 with st.form("health_entry_form"):
