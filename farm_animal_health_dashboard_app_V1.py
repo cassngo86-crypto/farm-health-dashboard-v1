@@ -4056,10 +4056,31 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 
 st.divider()
 #st.header("🐄 Log New Health Data")
-st.markdown("## <h2 style='color: #31333F;'>🐄 Log New Health Data</h2>", unsafe_allow_html=True)
+#st.markdown("## <h2 style='color: #31333F;'>🐄 Log New Health Data</h2>", unsafe_allow_html=True)
+# Custom CSS to force label visibility
+st.markdown("""
+    <style>
+    /* Force form labels to be dark and bold */
+    .stWidgetLabel p {
+        color: #1A1A1A !important;
+        font-weight: bold !important;
+        font-size: 1.1rem !important;
+    }
+    /* Force header color */
+    h2 {
+        color: #1A1A1A !important;
+    }
+    /* Ensure the input text itself is dark */
+    input {
+        color: #1A1A1A !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-# Create a form so the app doesn't rerun on every keystroke
+# Now your existing form code...
 with st.form("health_entry_form"):
+    st.header("🐄 Log New Health Data")
+    # ... rest of your form inputs
     col1, col2 = st.columns(2)
     
     with col1:
