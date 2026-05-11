@@ -124,9 +124,9 @@ if st.session_state.theme_choice == "Dark":
     """
     # Use st.markdown to inject the string into the app
     st.markdown(theme_css, unsafe_allow_html=True)
-    /* ============================================================*/
-       /* GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX*/
-      /* ============================================================ */
+   # /* ============================================================*/
+       #/* GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX*/
+    #  /* ============================================================ */
     html, body, .stApp, [data-testid="stAppViewContainer"] 
                             padding-top: 0 !important;
                         }
