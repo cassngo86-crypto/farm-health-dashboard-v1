@@ -104,6 +104,17 @@ page = st.sidebar.radio(
 if st.session_state.theme_choice == "Dark":
     st.session_state.plotly_template = "plotly_dark"
     theme_css = """
+    /* ADD THIS: Force labels and headers to be white in Dark Mode */
+    .stWidgetLabel p, h2, .stMarkdown p {
+        color: #FFFFFF !important;
+    }
+    
+    /* Ensure input text is readable */
+    input {
+        color: #FFFFFF !important;
+    }
+    """
+    st.markdown(f"<style>{theme_css}</style>", unsafe_allow_html=True)
     /* ============================================================
        GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX
        ============================================================ */
