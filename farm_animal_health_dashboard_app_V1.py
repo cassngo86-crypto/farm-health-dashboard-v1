@@ -106,22 +106,27 @@ if st.session_state.theme_choice == "Dark":
     
     theme_css = """
     <style>
-    /* ADD THIS: Force labels and headers to be white in Dark Mode */
+    /* Everything inside here is CSS, not Python */
     .stApp {
-        background-color: #0E1117; 
+        background-color: #0E1117;
+        padding-top: 0rem !important;
     }
 
-    /* Force labels to be white so they are visible in Dark Mode */
+    .main .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 0rem !important;
+    }
+
+    /* This makes your form labels white so you can see them */
     .stWidgetLabel p, h1, h2, h3, .stMarkdown p {
         color: #FFFFFF !important;
     }
 
-    /* Ensure text you type in the boxes is also readable */
     input {
         color: #FFFFFF !important;
     }
     </style>
-    """
+    """ 
     # Use st.markdown to inject the string into the app
     st.markdown(theme_css, unsafe_allow_html=True)
    # /* ============================================================*/
