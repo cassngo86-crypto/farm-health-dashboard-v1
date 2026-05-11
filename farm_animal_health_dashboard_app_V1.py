@@ -132,9 +132,9 @@ if st.session_state.theme_choice == "Dark":
    # /* ============================================================*/
        #/* GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX*/
     #  /* ============================================================ */
-    html, body, .stApp, [data-testid="stAppViewContainer"] 
-                            padding-top: 0 !important;
-                        }
+   # html, body, .stApp, [data-testid="stAppViewContainer"] 
+                   #         padding-top: 0 !important;
+                     #   }
 
     /* Remove the white strip at the very top */
     [data-testid="stAppViewContainer"] > .main {
