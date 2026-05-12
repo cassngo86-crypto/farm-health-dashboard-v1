@@ -89,6 +89,7 @@ page = st.sidebar.radio(
         "📈 Predictive Analytics",
         "🧬 K-Means Segmentation",
         "🏭 Production Operations",
+        "🧠 Upload Data",
         "💰 Harvest & Revenue Simulator",
         "🧠 Explainable AI (SHAP)",
         "🤖 Ask the Farm AI",
@@ -96,10 +97,10 @@ page = st.sidebar.radio(
         "🔗 Data Lineage",
         "🤖 AI/ML Journey",
         
+        
     ],
 )
 
-# global CSS 
 
 # global CSS 
 if st.session_state.theme_choice == "Dark":
@@ -3924,10 +3925,14 @@ elif page == "🤖 AI/ML Journey":
     )
 
     render_model_dev_journey_table()
+ # ================================================================
+# PAGE 9 — UPLOAD DATA
+# ================================================================
+elif page == "🧠 Upload Data":
 
-import streamlit as st
+    st.markdown("## 🧠 Upload new data ")
+    
 from streamlit_gsheets import GSheetsConnection
-import pandas as pd
 
 # Initialize connection
 conn = st.connection("gsheets", type=GSheetsConnection)
