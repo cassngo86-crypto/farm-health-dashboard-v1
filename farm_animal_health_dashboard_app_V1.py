@@ -3962,7 +3962,7 @@ elif page == "🧠 Upload Data":
     
     # Now your existing form code...
     with st.form("health_entry_form"):
-    st.header("🐄 Log New Health Data")
+        st.header("🐄 Log New Health Data")
     # ... rest of your form inputs
     col1, col2 = st.columns(2)
     
