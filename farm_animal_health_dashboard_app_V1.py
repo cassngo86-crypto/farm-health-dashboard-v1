@@ -3932,16 +3932,16 @@ elif page == "🧠 Upload Data":
 
     st.markdown("## 🧠 Upload new data ")
     
-from streamlit_gsheets import GSheetsConnection
-
-# Initialize connection
-conn = st.connection("gsheets", type=GSheetsConnection)
-
-st.divider()
-#st.header("🐄 Log New Health Data")
-#st.markdown("## <h2 style='color: #31333F;'>🐄 Log New Health Data</h2>", unsafe_allow_html=True)
-# Custom CSS to force label visibility
-st.markdown("""
+    from streamlit_gsheets import GSheetsConnection
+    
+    # Initialize connection
+    conn = st.connection("gsheets", type=GSheetsConnection)
+    
+    st.divider()
+    #st.header("🐄 Log New Health Data")
+    #st.markdown("## <h2 style='color: #31333F;'>🐄 Log New Health Data</h2>", unsafe_allow_html=True)
+    # Custom CSS to force label visibility
+    st.markdown("""
     <style>
     /* Force form labels to be dark and bold */
     .stWidgetLabel p {
@@ -3959,9 +3959,9 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-
-# Now your existing form code...
-with st.form("health_entry_form"):
+    
+    # Now your existing form code...
+    with st.form("health_entry_form"):
     st.header("🐄 Log New Health Data")
     # ... rest of your form inputs
     col1, col2 = st.columns(2)
@@ -3977,9 +3977,9 @@ with st.form("health_entry_form"):
     notes = st.text_area("Additional Notes")
     
     submit = st.form_submit_button("Save to Google Sheets")
-
-# Logic to append data
-if submit:
+    
+    # Logic to append data
+    if submit:
     if animal_id:
         # 1. Read existing data from your sheet
         existing_data = conn.read(worksheet="Sheet1")
