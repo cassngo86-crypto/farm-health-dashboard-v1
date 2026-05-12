@@ -3980,28 +3980,28 @@ elif page == "🧠 Upload Data":
     
     # Logic to append data
     if submit:
-    if animal_id:
-        # 1. Read existing data from your sheet
-        existing_data = conn.read(worksheet="Sheet1")
-        
-        # 2. Create a DataFrame for the new entry
-        new_row = pd.DataFrame([{
-            "Date": date_logged.strftime("%Y-%m-%d"),
-            "Animal_ID": animal_id,
-            "Health_Score": health_score,
-            "Status": status,
-            "Notes": notes
-        }])
-        
-        # 3. Concatenate and update the sheet
-        updated_df = pd.concat([existing_data, new_row], ignore_index=True)
-        conn.update(worksheet="Sheet1", data=updated_df)
-        
-        st.success(f"Successfully logged data for {animal_id}!")
-        # Clear cache so the dashboard updates with the new data
-        st.cache_data.clear()
-    else:
-        st.warning("Please enter an Animal ID before saving.")
+        if animal_id:
+            # 1. Read existing data from your sheet
+            existing_data = conn.read(worksheet="Sheet1")
+            
+            # 2. Create a DataFrame for the new entry
+            new_row = pd.DataFrame([{
+                "Date": date_logged.strftime("%Y-%m-%d"),
+                "Animal_ID": animal_id,
+                "Health_Score": health_score,
+                "Status": status,
+                "Notes": notes
+            }])
+            
+            # 3. Concatenate and update the sheet
+            updated_df = pd.concat([existing_data, new_row], ignore_index=True)
+            conn.update(worksheet="Sheet1", data=updated_df)
+            
+            st.success(f"Successfully logged data for {animal_id}!")
+            # Clear cache so the dashboard updates with the new data
+            st.cache_data.clear()
+        else:
+            st.warning("Please enter an Animal ID before saving.")
 
 
 
