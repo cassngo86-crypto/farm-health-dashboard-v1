@@ -99,89 +99,78 @@ page = st.sidebar.radio(
     ],
 )
 
-    # global CSS 
-    
-    if st.session_state.theme_choice == "Dark":
-        st.session_state.plotly_template = "plotly_dark"
-        
-        theme_css = """
-        <style>
-        /* ============================================================
-           GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX
-           ============================================================ */
-        html, body, .stApp, [data-testid="stAppViewContainer"] {
-            background-color: #0E1117 !important;
-            padding-top: 0 !important;
-        }
-    
-        /* Remove the white strip at the very top */
-        [data-testid="stAppViewContainer"] > .main {
-            padding-top: 0rem !important;
-            margin-top: 0 !important;
-        }
-    
-        .block-container {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-    
-        /* Sidebar Styling */
-        section[data-testid="stSidebar"] {
-            background-color: #030712 !important;
-            color: #e5e7eb !important;
-        }
-    
-        /* Expander Fixes */
-        div[data-testid="stExpander"], details[data-testid="st-expander"] {
-            background-color: #020617 !important;
-            border: 1px solid #1f2937 !important;
-        }
-    
-        /* Force Label Visibility */
-        .stWidgetLabel p, h1, h2, h3, .stMarkdown p, label, span {
-            color: #e5e7eb !important;
-        }
-    
-        /* Selectbox / Dropdown Fixes */
-        div[data-baseweb="select"], div[data-baseweb="select"] > div {
-            background-color: #0f172a !important;
-            color: #e5e7eb !important;
-        }
-        </style>
-        """
-    else:
-        st.session_state.plotly_template = "plotly_white"
-        theme_css = """
-        <style>
-        .stApp, html, body, [data-testid="stAppViewContainer"] {
-            background-color: #f7fbff !important;
-            color: #111827 !important;
-        }
-        </style>
-        """
-    
-    # This single line applies all the conditions at once
-    st.markdown(theme_css, unsafe_allow_html=True)
-    /* ============================================================
-       METRIC + BUTTON STYLING
-       ============================================================ */
-    [data-testid="stMetricValue"] { color: #ffffff !important; }
-    [data-testid="stMetricLabel"] { color: #cbd5e1 !important; }
-    [data-testid="stMetricDelta"] { color: #22c55e !important; }
+# global CSS 
 
-    .stButton > button {
-        background-color: #111827 !important;
+if st.session_state.theme_choice == "Dark":
+    st.session_state.plotly_template = "plotly_dark"
+    
+    theme_css = """
+    <style>
+    /* ============================================================
+       GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX
+       ============================================================ */
+    html, body, .stApp, [data-testid="stAppViewContainer"] {
+        background-color: #0E1117 !important;
+        padding-top: 0 !important;
+    }
+
+    /* Remove the white strip at the very top */
+    [data-testid="stAppViewContainer"] > .main {
+        padding-top: 0rem !important;
+        margin-top: 0 !important;
+    }
+
+    .block-container {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    /* Sidebar Styling */
+    section[data-testid="stSidebar"] {
+        background-color: #030712 !important;
         color: #e5e7eb !important;
-        border: 1px solid #6366f1 !important;
-        border-radius: 999px !important;
-        padding: 0.4rem 1rem !important;
-        transition: 0.2s ease-in-out;
     }
-    .stButton > button:hover {
-        background-color: #1f2937 !important;
-        box-shadow: 0 0 18px rgba(99,102,241,0.5);
-        transform: translateY(-1px);
+
+    /* Expander Fixes */
+    div[data-testid="stExpander"], details[data-testid="st-expander"] {
+        background-color: #020617 !important;
+        border: 1px solid #1f2937 !important;
     }
+
+    /* Force Label Visibility */
+    .stWidgetLabel p, h1, h2, h3, .stMarkdown p, label, span {
+        color: #e5e7eb !important;
+    }
+
+    /* Selectbox / Dropdown Fixes */
+    div[data-baseweb="select"], div[data-baseweb="select"] > div {
+        background-color: #0f172a !important;
+        color: #e5e7eb !important;
+    }
+    </style>
+    """
+# This single line applies all the conditions at once
+st.markdown(theme_css, unsafe_allow_html=True)
+/* ============================================================
+   METRIC + BUTTON STYLING
+   ============================================================ */
+[data-testid="stMetricValue"] { color: #ffffff !important; }
+[data-testid="stMetricLabel"] { color: #cbd5e1 !important; }
+[data-testid="stMetricDelta"] { color: #22c55e !important; }
+
+.stButton > button {
+    background-color: #111827 !important;
+    color: #e5e7eb !important;
+    border: 1px solid #6366f1 !important;
+    border-radius: 999px !important;
+    padding: 0.4rem 1rem !important;
+    transition: 0.2s ease-in-out;
+}
+.stButton > button:hover {
+    background-color: #1f2937 !important;
+    box-shadow: 0 0 18px rgba(99,102,241,0.5);
+    transform: translateY(-1px);
+}
     /* ============================================================
    DARK MODE — FIX SELECTBOX / DROPDOWN BACKGROUND + TEXT
    ============================================================ */
@@ -226,7 +215,7 @@ ul[role="listbox"] li:hover {
     """
 
 else:
-    st.session_state.plotly_template = "plotly_white"
+   #st.session_state.plotly_template = "plotly_white"
     theme_css = """
   
     /* Main app background (soft neutral light tone) */
