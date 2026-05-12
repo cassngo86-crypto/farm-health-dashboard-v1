@@ -3929,62 +3929,33 @@ elif page == "🤖 AI/ML Journey":
 # PAGE 9 — UPLOAD DATA
 # ================================================================
 elif page == "🧠 Upload Data":
-
     st.markdown("## 🧠 Upload new data ")
     
+    # 1. Initialize connection
     from streamlit_gsheets import GSheetsConnection
-    
-    # Initialize connection
     conn = st.connection("gsheets", type=GSheetsConnection)
-    
-    st.divider()
-    #st.header("🐄 Log New Health Data")
-    #st.markdown("## <h2 style='color: #31333F;'>🐄 Log New Health Data</h2>", unsafe_allow_html=True)
-    # Custom CSS to force label visibility
-    st.markdown("""
-    <style>
-    /* Force form labels to be dark and bold */
-    .stWidgetLabel p {
-        color: #1A1A1A !important;
-        font-weight: bold !important;
-        font-size: 1.1rem !important;
-    }
-    /* Force header color */
-    h2 {
-        color: #1A1A1A !important;
-    }
-    /* Ensure the input text itself is dark */
-    input {
-        color: #1A1A1A !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    # Now your existing form code...
+
+    # 2. The Form Container
     with st.form("health_entry_form"):
         st.header("🐄 Log New Health Data")
-    # ... rest of your form inputs
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        animal_id = st.text_input("Animal ID (e.g., COW-001)")
-        health_score = st.number_input("Health Score", min_value=0, max_value=100, value=75)
-    
-    with col2:
-        date_logged = st.date_input("Date of Observation")
-        status = st.selectbox("Status", ["Healthy", "Monitoring", "Treatment Required"])
         
-    notes = st.text_area("Additional Notes")
-    
-    submit = st.form_submit_button("Save to Google Sheets")
-    
-    # Logic to append data
+        col1, col2 = st.columns(2)
+        with col1:
+            animal_id = st.text_input("Animal ID (e.g., COW-001)")
+            health_score = st.number_input("Health Score", min_value=0, max_value=100, value=75)
+        with col2:
+            date_logged = st.date_input("Date of Observation")
+            status = st.selectbox("Status", ["Healthy", "Monitoring", "Treatment Required"])
+            
+        notes = st.text_area("Additional Notes")
+        
+        # THIS LINE MUST BE INDENTED UNDER 'with st.form'
+        submit = st.form_submit_button("Save to Google Sheets")
+
+    # 3. Logic to append data (OUTSIDE the form, but INSIDE the page)
     if submit:
         if animal_id:
-            # 1. Read existing data from your sheet
             existing_data = conn.read(worksheet="Sheet1")
-            
-            # 2. Create a DataFrame for the new entry
             new_row = pd.DataFrame([{
                 "Date": date_logged.strftime("%Y-%m-%d"),
                 "Animal_ID": animal_id,
@@ -3992,16 +3963,12 @@ elif page == "🧠 Upload Data":
                 "Status": status,
                 "Notes": notes
             }])
-            
-            # 3. Concatenate and update the sheet
             updated_df = pd.concat([existing_data, new_row], ignore_index=True)
             conn.update(worksheet="Sheet1", data=updated_df)
             
             st.success(f"Successfully logged data for {animal_id}!")
-            # Clear cache so the dashboard updates with the new data
             st.cache_data.clear()
         else:
             st.warning("Please enter an Animal ID before saving.")
-
 
 
