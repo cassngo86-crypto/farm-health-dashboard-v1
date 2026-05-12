@@ -106,142 +106,62 @@ if st.session_state.theme_choice == "Dark":
     
     theme_css = """
     <style>
-    /* Everything inside here is CSS, not Python */
-    .stApp {
-        background-color: #0E1117;
-        padding-top: 0rem !important;
+    /* ============================================================
+       GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX
+       ============================================================ */
+    html, body, .stApp, [data-testid="stAppViewContainer"] {
+        background-color: #0E1117 !important;
+        padding-top: 0 !important;
     }
-
-    .main .block-container {
-        padding-top: 1rem !important;
-        padding-bottom: 0rem !important;
-    }
-
-    /* This makes your form labels white so you can see them */
-    .stWidgetLabel p, h1, h2, h3, .stMarkdown p {
-        color: #FFFFFF !important;
-    }
-
-    input {
-        color: #FFFFFF !important;
-    }
-    </style>
-    """ 
-    # Use st.markdown to inject the string into the app
-    st.markdown(theme_css, unsafe_allow_html=True)
-   # /* ============================================================*/
-       #/* GLOBAL DARK MODE BACKGROUND + HEADER / PADDING FIX*/
-    #  /* ============================================================ */
-   # html, body, .stApp, [data-testid="stAppViewContainer"] 
-                   #         padding-top: 0 !important;
-                     #   }
 
     /* Remove the white strip at the very top */
     [data-testid="stAppViewContainer"] > .main {
         padding-top: 0rem !important;
         margin-top: 0 !important;
     }
-    /* ----- REMOVE DEFAULT STREAMLIT TOP PADDING ----- */
+
     .block-container {
         padding-top: 0 !important;
         margin-top: 0 !important;
     }
 
-    /* Hide default Streamlit header background */
-    header, [data-testid="stHeader"] {
-        background-color: transparent !;
-        height: 28px !important;        /* required for Deploy button */
-        min-height: 28px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        }
-
-        /* ---- Make sure main page does not overlap toolbar ---- */
-    [data-testid="stAppViewContainer"] {
-        padding-top: 0px !important;   /* clear space below Deploy bar */
-    }
-
-    /* Sidebar */
+    /* Sidebar Styling */
     section[data-testid="stSidebar"] {
         background-color: #030712 !important;
         color: #e5e7eb !important;
     }
-    section[data-testid="stSidebar"] * {
-        color: #e5e7eb !important;
-        padding-top: 32 !important;  aligns sidebar with main content
-    }
 
-    /* Base text colour so sliders / labels etc. are visible */
-    .stApp, .stApp * {
-        color: #e5e7eb !important;
-    }
-
-    /* ============================================================
-       EXPANDERS – FORCE DARK IN ALL STATES (FIXES WHITE HEADER)
-       ============================================================ */
-
-    /* Outer expander container (Streamlit uses both div+details
-       and details[data-testid="st-expander"] in different builds) */
-    div[data-testid="stExpander"],
-    details[data-testid="st-expander"] {
+    /* Expander Fixes */
+    div[data-testid="stExpander"], details[data-testid="st-expander"] {
         background-color: #020617 !important;
-        border-radius: 8px !important;
         border: 1px solid #1f2937 !important;
-        overflow: hidden !important;
     }
 
-    /* Header row (collapsed) */
-    div[data-testid="stExpander"] > details > summary,
-    details[data-testid="st-expander"] > summary {
-        background-color: #020617 !important;
-        color: #e5e7eb !important;
-        padding: 0.65rem 1rem !important;
-        border-bottom: 1px solid #1f2937 !important;
-        cursor: pointer;
-    }
-
-    /* Header row when OPEN – stop it turning light grey */
-    div[data-testid="stExpander"] > details[open] > summary,
-    details[data-testid="st-expander"][open] > summary {
-        background-color: #020617 !important;
+    /* Force Label Visibility */
+    .stWidgetLabel p, h1, h2, h3, .stMarkdown p, label, span {
         color: #e5e7eb !important;
     }
 
-    /* Remove focus / active highlight that brings back white */
-    details[data-testid="st-expander"] > summary:focus,
-    details[data-testid="st-expander"] > summary:focus-visible,
-    div[data-testid="stExpander"] > details > summary:focus,
-    div[data-testid="stExpander"] > details > summary:focus-visible {
-        outline: none !important;
-        box-shadow: none !important;
-        background-color: #020617 !important;
+    /* Selectbox / Dropdown Fixes */
+    div[data-baseweb="select"], div[data-baseweb="select"] > div {
+        background-color: #0f172a !important;
         color: #e5e7eb !important;
     }
-
-    /* Hover state (slightly lighter, but still dark) */
-    div[data-testid="stExpander"] > details > summary:hover,
-    details[data-testid="st-expander"] > summary:hover {
-        background-color: #111827 !important;
-        color: #e5e7eb !important;
+    </style>
+    """
+else:
+    st.session_state.plotly_template = "plotly_white"
+    theme_css = """
+    <style>
+    .stApp, html, body, [data-testid="stAppViewContainer"] {
+        background-color: #f7fbff !important;
+        color: #111827 !important;
     }
+    </style>
+    """
 
-    /* Expander body/content */
-    div[data-testid="stExpander"] > div,
-    details[data-testid="st-expander"] > div {
-        background-color: #030712 !important;
-        color: #e5e7eb !important;
-    }
-
-    /* ============================================================
-       SLIDER LABEL VISIBILITY (Daily feed intake, Age, etc.)
-       ============================================================ */
-    div[data-testid="stSlider"] label,
-    div[data-testid="stSlider"] span {
-        color: #e5e7eb !important;
-    }
-
+# This single line applies all the conditions at once
+st.markdown(theme_css, unsafe_allow_html=True)
     /* ============================================================
        METRIC + BUTTON STYLING
        ============================================================ */
